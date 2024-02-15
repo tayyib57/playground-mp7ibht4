@@ -1,25 +1,16 @@
-# Welcome!
+#include <stdio.h>
+#include <mpi.h>
 
-This C# template lets you get started quickly with a simple one-page playground.
+int main(int argc, char** argv) {
+    MPI_Init(&argc, &argv);
 
-```C# runnable
-// { autofold
-using System;
+    int world_rank;
+    MPI_Comm_rank(MPI_COMM_WORLD, &world_rank);
 
-class Hello 
-{
-    static void Main() 
-    {
-// }
-
-Console.WriteLine("Hello World!");
-
-// { autofold
+    if (world_rank == 0) {
+        printf("Hello World from process %d!\n", world_rank);
     }
+
+    MPI_Finalize();
+    return 0;
 }
-// }
-```
-
-# Advanced usage
-
-If you want a more complex example (external libraries, viewers...), use the [Advanced C# template](https://tech.io/select-repo/386)
